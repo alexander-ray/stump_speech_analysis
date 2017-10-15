@@ -1,6 +1,6 @@
 import json
 import os
-from speech_scraper import save_remarks
+from speech_scraper import remarks_driver
 
 def main():
     clinton_remarks_test = []
@@ -18,7 +18,7 @@ def main():
             exists = False
 
     if (not exists):
-        save_remarks()
+        remarks_driver()
 
     for key, value in filenames.items():
         with open(key) as json_file:

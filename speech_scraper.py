@@ -44,7 +44,7 @@ def get_relevant_urls(base_url):
     except Exception as e:
         return "Exception occurred \n" +str(e)
 
-def get_remarks(url, label, train_fn, test_fn):
+def save_remarks(url, label, train_fn, test_fn):
     remark_urls = get_relevant_urls(url)
     remarks_train = []
     remarks_test = []
@@ -60,37 +60,8 @@ def get_remarks(url, label, train_fn, test_fn):
     with open(test_fn, 'w') as fout:
         json.dump(remarks_test, fout)
 
-def save_remarks():
-    get_remarks('http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000',
+def remarks_driver():
+    save_remarks('http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000',
                 'clinton', 'clinton_remarks_train', 'clinton_remarks_test')
-    get_remarks('http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=44&campaign=2008OBAMA&doctype=5000',
+    save_remarks('http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=44&campaign=2008OBAMA&doctype=5000',
                 'obama', 'obama_remarks_train', 'obama_remarks_test')
-    '''
-    clinton_remark_urls = get_relevant_urls('http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000')
-    clinton_remarks_train = []
-    clinton_remarks_test = []
-    c = len(clinton_remark_urls)
-    # Put 1/10 speeches in test set
-    for i in range(0, c):
-        if (i % 10 == 0):
-            clinton_remarks_test.append(['clinton', get_speech(clinton_remark_urls[i])])
-        else:
-            clinton_remarks_train.append(['clinton', get_speech(clinton_remark_urls[i])])
-    with open('clinton_remarks_train', 'w') as fout:
-        json.dump(clinton_remarks_train, fout)
-    with open('clinton_remarks_test', 'w') as fout:
-        json.dump(clinton_remarks_test, fout)
-
-    obama_remark_urls = get_relevant_urls('http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=44&campaign=2008OBAMA&doctype=5000')
-    obama_remarks_train = []
-    obama_remarks_test = []
-    c = len(obama_remark_urls)
-
-    for i in range(0, c):
-        if (i % 10 == 0):
-            obama_remarks_test.append(['obama', get_speech(obama_remark_urls[i])])
-        else:
-            obama_remarks_train.append(['obama', get_speech(obama_remark_urls[i])])
-    with open('obama_remarks', 'w') as fout:
-        json.dump(obama_remarks, fout)
-    '''
