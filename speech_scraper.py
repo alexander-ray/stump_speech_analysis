@@ -22,9 +22,9 @@ def get_speech(url):
         # Return list of lowercase words without punctuation
         txt = txt.lower()
         txt = re.sub('[^a-z\ \']+', " ", txt)
-        words = list(txt.split())
-        return {i:words.count(i) for i in set(words)}
-
+        #words = list(txt.split())
+        #return {i:words.count(i) for i in set(words)}
+        return txt
     except Exception as e:
         return "Exception occurred \n" +str(e)
 
@@ -64,4 +64,6 @@ def remarks_driver():
     save_remarks('http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000',
                 'clinton', 'clinton_remarks_train', 'clinton_remarks_test')
     save_remarks('http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=44&campaign=2008OBAMA&doctype=5000',
-                'obama', 'obama_remarks_train', 'obama_remarks_test')
+                'obama1', 'obama1_remarks_train', 'obama1_remarks_test')
+    save_remarks('http://www.presidency.ucsb.edu/2012_election_speeches.php?candidate=44&doctype=1150',
+                'obama2', 'obama2_remarks_train', 'obama2_remarks_test')
